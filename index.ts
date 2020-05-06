@@ -3,6 +3,9 @@ const app = express()
 import bodyParser from 'body-parser'
 import { IPerson } from './client/src/interfaces/IPerson'
 
+const cors = require('cors')
+app.use(cors())
+
 const apiPersonsUri = '/api/persons/'
 app.use(bodyParser.json())
 
@@ -49,7 +52,7 @@ app.get(apiPersonsUri + ':id', (req: any, res: any) => {
 })
 
 const generateId = (): string => {
-  const id = Math.random()*Number.MAX_VALUE
+  const id = Math.random()
   return id.toString()
 }
 
@@ -75,6 +78,12 @@ app.delete(apiPersonsUri + ':id', (req: any, res: any) => {
 
   res.status(204).end()
 })
+
+const error = (_req: any, res: any) => {
+  res.status(404).send({error: 'unknown endpoint'})
+}
+
+app.use(error)
 
 const PORT = 3001
 app.listen(PORT, () => {
