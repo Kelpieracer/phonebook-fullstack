@@ -17,19 +17,5 @@
             ],
             "sourceMaps": true
         },
-        { 
-            // Just launch in debug mode. 
-            // Break-points hit nicely, but no automatic restart
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}\\index.ts",
-            "outFiles": [
-                "${workspaceFolder}\\out\\index.js"
-            ]
-        },
     ]
 }

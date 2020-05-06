@@ -1,83 +1,79 @@
 import express from 'express'
 const app = express()
 import bodyParser from 'body-parser'
+import { IPerson } from './client/src/interfaces/IPerson'
 
+const apiPersonsUri = '/api/persons/'
 app.use(bodyParser.json())
 
-interface INotes {
-  id: number,
-  content: string,
-  date: string,
-  important: boolean
-} 
-
-let notes: INotes[] = [
+let persons: IPerson[] = [
   {
-    id: 1,
-    content: 'HTML on helppoa',
-    date: '2017-12-10T17:30:31.098Z',
-    important: true
-  }, 
-  { 
-    id: 2,
-    content: 'Selain pystyy suorittamaan vain javascriptiä',
-    date: '2017-12-10T18:39:34.091Z',
-    important: false
-  }, 
-  { 
-    id: 3, 
-    content: 'HTTP-protokollan tärkeimmät metodit ovat GET ja POST',
-    date: '2017-12-10T19:20:14.298Z',
-    important: true
+    id: "1",
+    name: "Arto Hellas",
+    tel: "040-123456"
+  },
+  {
+    id: "2",
+    name: "Martti Tienari",
+    tel: "040-123457"
+  },
+  {
+    id: "3",
+    name: "Arto Järvinen",
+    tel: "040-123458"
+  },
+  {
+    id: "4",
+    name: "Lea Maria Kutvonen",
+    tel: "040-123459"
   }
 ]
 
-app.get('/', (_req:any, res:any) => {
+app.get('/', (_req: any, res: any) => {
   res.send('<h1>Hello World!</h1>')
 })
 
-app.get('/notes', (_req:any, res:any) => {
-  res.json(notes)
+app.get(apiPersonsUri, (_req: any, res: any) => {
+  res.json(persons)
 })
 
-app.get('/notes/:id', (req:any, res:any) => {
-  const id = Number(req.params.id)
-  const note = notes.find(note => note.id === id)
+app.get(apiPersonsUri + ':id', (req: any, res: any) => {
+  const id = req.params.id
+  const person = persons.find(person => person.id === id)
 
-  if (note) {
-    res.json(note)
+  if (person) {
+    res.json(person)
   } else {
     res.status(404).end()
   }
 })
 
-const generateId = () => {
-  const maxId = notes.length > 0 ? notes.map(n => n.id).sort().reverse()[0] : 1
-  return maxId + 1
+const generateId = (): string => {
+  const maxId = persons.map(a => a.id ? +a.id : -1).filter(a => a).reduce((a, b) => a > b ? a : b)
+  return (maxId + 1).toString()
 }
 
-app.post('/notes', (req:any, res:any) => {
-  const body = req.body
+app.post(apiPersonsUri, (req: any, res: any) => {
+  const body: any = req.body
 
   if (body.content === undefined) {
     return res.status(400).json({ error: 'content missing' })
   }
 
-  const note: INotes = {
-    content: body.content,
-    important: body.important || false,
-    date: new Date().toDateString(),
+  const person: IPerson = {
+    name: body.name,
+    tel: body.tel,
     id: generateId()
   }
 
-  notes = notes.concat(note)
+  persons.push(person)
 
-  res.json(note)
+  res.json(person)
 })
 
-app.delete('/notes/:id', (req:any, res:any) => {
-  const id = Number(req.params.id)
-  notes = notes.filter(note => note.id !== id)
+app.delete(apiPersonsUri + ':id', (req: any, res: any) => {
+  const id = req.params.id
+  persons = persons.filter(person => person.id !== id)
 
   res.status(204).end()
 })
