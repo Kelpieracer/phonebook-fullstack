@@ -44,7 +44,7 @@ app.get(apiPersonsUri + ':id', (req: any, res: any) => {
   if (person) {
     res.json(person)
   } else {
-    res.status(400).end()   // Client error
+    res.status(400).json({ error: 'id not found' }).end()   // Client error
   }
 })
 
@@ -54,20 +54,15 @@ const generateId = (): string => {
 }
 
 app.post(apiPersonsUri, (req: any, res: any) => {
-  const body: any = req.body
-
-  if (body.content === undefined) {
-    return res.status(400).json({ error: 'content missing' })
-  }
-
   const person: IPerson = {
-    name: body.name,
-    tel: body.tel,
-    id: generateId()
+    name: req.body.name,
+    tel: req.body.tel
   }
-
+  if (!person.name || !person.tel) {
+    res.status(400).json({ error: 'content format does not match' }).end()   // Client error
+  }
+  person.id = generateId()
   persons.push(person)
-
   res.json(person)
 })
 
