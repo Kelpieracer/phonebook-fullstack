@@ -3,7 +3,7 @@ const app = express()
 import bodyParser from 'body-parser'
 import { IPerson } from './client/src/interfaces/IPerson'
 
-const cors = require('cors')
+import cors from 'cors'
 app.use(cors())
 
 const apiPersonsUri = '/api/persons/'
