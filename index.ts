@@ -49,8 +49,8 @@ app.get(apiPersonsUri + ':id', (req: any, res: any) => {
 })
 
 const generateId = (): string => {
-  const maxId = persons.map(a => a.id ? +a.id : -1).filter(a => a).reduce((a, b) => a > b ? a : b)
-  return (maxId + 1).toString()
+  const id = Math.random()*Number.MAX_VALUE
+  return id.toString()
 }
 
 app.post(apiPersonsUri, (req: any, res: any) => {
