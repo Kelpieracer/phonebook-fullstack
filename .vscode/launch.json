@@ -5,7 +5,8 @@
     "version": "0.2.0",
     "configurations": [
         {
-            // Use: "npm run watch:debug" first, then attach debugger
+            // Use: "npm run watch:debug" first, then attach debugger, if you want program to stop in the beginning
+            // Use: "npm run watch:debug2" first, then attach debugger, if you want program to run
             // Result: autosave and debugging work! Some strange issues with break-points
             "name": "Attach: npm run watch:debug",
             "type": "node",

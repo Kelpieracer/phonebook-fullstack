@@ -44,7 +44,7 @@ app.get(apiPersonsUri + ':id', (req: any, res: any) => {
   if (person) {
     res.json(person)
   } else {
-    res.status(404).end()
+    res.status(400).end()   // Client error
   }
 })
 
