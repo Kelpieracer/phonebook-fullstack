@@ -1,0 +1,35 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // Use: "npm run watch:debug" first, then attach debugger
+            // Result: autosave and debugging work! Some strange issues with break-points
+            "name": "Attach: npm run watch:debug",
+            "type": "node",
+            "request": "attach",
+            "restart": true,
+            "port": 5858,
+            "outFiles": [
+                "${workspaceFolder}\\out"
+            ],
+            "sourceMaps": true
+        },
+        { 
+            // Just launch in debug mode. 
+            // Break-points hit nicely, but no automatic restart
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\index.ts",
+            "outFiles": [
+                "${workspaceFolder}\\out\\index.js"
+            ]
+        },
+    ]
+}
