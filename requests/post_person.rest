@@ -2,7 +2,7 @@ POST http://localhost:3001/api/persons
 content-type: application/json
 
 {
-  "name": "VS Coden REST client on paras keksintö sitten viipaloidun leivän",
+  "name": "VS Coden REST cl ient on paras keksintö sitten viipaloidun leivän",
   "tel": "112",
   "a": 1
 }

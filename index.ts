@@ -55,11 +55,14 @@ const generateId = (): string => {
 
 app.post(apiPersonsUri, (req: any, res: any) => {
   const person: IPerson = {
-    name: req.body.name,
-    tel: req.body.tel
+    name: req.body.name.trim(),
+    tel: req.body.tel.trim(),
   }
-  if (!person.name || !person.tel) {
+  if (!person.name || !person.tel) { 
     res.status(400).json({ error: 'content format does not match' }).end()   // Client error
+  }
+  if (persons.find(a => a.name===person.name)) {
+    res.status(400).json({ error: 'name must be unique' }).end()   // Client error
   }
   person.id = generateId()
   persons.push(person)
