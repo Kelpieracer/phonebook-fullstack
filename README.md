@@ -12,4 +12,4 @@ On Windows, you need to start development with:
 ```
 and then in VSCode you can use launch.json/attach as debugger
 
-Exercise 3.7: backend: https://phonebookback.azurewebsites.net/ frontend: https://phonebookfront.z6.web.core.windows.net/
+Exercise @3.8: backend: https://phonebookback.azurewebsites.net/ frontend @3.7: https://phonebookfront.z6.web.core.windows.net/
