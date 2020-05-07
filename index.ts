@@ -1,13 +1,17 @@
+const appName = '(phonebookfront) '
+console.log(appName + 'Server script started.')
 import express from 'express'
 const app = express()
 import bodyParser from 'body-parser'
 import { IPerson } from './client/src/interfaces/IPerson'
-
 import cors from 'cors'
+
 app.use(cors())
+console.log(appName + 'Cors applied.')
 const apiPersonsUri = '/api/persons/'
 
 app.use(bodyParser.json())
+console.log(appName + 'Body_parser applied.')
 
 let persons: IPerson[] = [
   {
@@ -31,6 +35,7 @@ let persons: IPerson[] = [
     tel: "040-123459"
   }
 ]
+console.log(appName + 'Demo data loaded.')
 
 app.get('/', (_req: any, res: any) => {
   res.send('<h1>Hello World!</h1>')
@@ -61,10 +66,10 @@ app.post(apiPersonsUri, (req: any, res: any) => {
     name: req.body.name.trim(),
     tel: req.body.tel.trim(),
   }
-  if (!person.name || !person.tel) { 
+  if (!person.name || !person.tel) {
     res.status(400).json({ error: 'content format does not match' }).end()   // Client error
   }
-  if (persons.find(a => a.name===person.name)) {
+  if (persons.find(a => a.name === person.name)) {
     res.status(400).json({ error: 'name must be unique' }).end()   // Client error
   }
   person.id = generateId()
@@ -80,12 +85,15 @@ app.delete(apiPersonsUri + ':id', (req: any, res: any) => {
 })
 
 const error = (_req: any, res: any) => {
-  res.status(404).send({error: 'unknown endpoint'})
+  res.status(404).send({ error: 'unknown endpoint' })
 }
-
 app.use(error)
+console.log(appName + 'Routes loaded.')
 
 const PORT = process.env.PORT || 3001
+console.log(appName + `Environment variable PORT=${PORT}.`)
+
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+  console.log(appName + `Server running on port ${PORT}`)
 })
+console.log(appName + 'Server init script exits.')

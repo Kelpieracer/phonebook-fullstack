@@ -1,11 +1,11 @@
 {
-  "name": "notebackend",
+  "name": "phonebookback",
   "version": "0.0.1",
   "description": "",
   "main": "index.ts",
   "scripts": {
     "dev": "node_modules/.bin/nodemon --watch . -e ts --exec node_modules/.bin/ts-node index.ts",
-    "start": "node_modules/.bin/ts-node index.ts",
+    "start": "node out/index.js",
     "watch:debug": "node_modules/.bin/nodemon --inspect-brk=5858 -e ts,tsx --exec node -r ts-node/register ./index.ts",
     "watch:debug2": "node_modules/.bin/nodemon --inspect=5858 -e ts,tsx --exec node -r ts-node/register ./index.ts",
     "build": "tsc --project .",
@@ -23,24 +23,22 @@
   "author": "Matti Luukkainen",
   "license": "MIT",
   "dependencies": {
-    "@types/body-parser": "^1.19.0",
-    "@types/cors": "^2.8.6",
-    "@types/express": "^4.17.6",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "eslint": "^6.8.0",
-    "express": "^4.16.2",
-    "ts-node": "^8.10.1",
-    "typescript": "^3.8.3"
+    "express": "^4.16.2"
   },
   "eslintConfig": {
     "extends": "part3-1"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.6",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.8.3",
     "eslint": "^6.8.0",
-    "nodemon": "^1.19.4",
-    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+    "nodemon": "^1.19.4"
   }
 }
