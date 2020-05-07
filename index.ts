@@ -1,17 +1,21 @@
 const appName = '(phonebookfront) '
-console.log(appName + 'Server script started.')
+console.log(`${appName}Server script started.`)
 import express from 'express'
 const app = express()
 import bodyParser from 'body-parser'
 import { IPerson } from './client/src/interfaces/IPerson'
 import cors from 'cors'
 
+// Static files https://expressjs.com/en/starter/static-files.html
+app.use(express.static('build'))
+console.log(`${appName}Static service applied.`)
+
 app.use(cors())
-console.log(appName + 'Cors applied.')
+console.log(`${appName}Cors applied.`)
 const apiPersonsUri = '/api/persons/'
 
 app.use(bodyParser.json())
-console.log(appName + 'Body_parser applied.')
+console.log(`${appName}Body_parser applied.`)
 
 let persons: IPerson[] = [
   {
@@ -35,11 +39,11 @@ let persons: IPerson[] = [
     tel: "040-123459"
   }
 ]
-console.log(appName + 'Demo data loaded.')
+console.log(`${appName}Demo data loaded.`)
 
-app.get('/', (_req: any, res: any) => {
-  res.send('<h1>Hello World!</h1>')
-})
+// app.get('/', (_req: any, res: any) => {
+//   res.send('<h1>Hello World!</h1>')
+// })
 
 app.get(apiPersonsUri, (_req: any, res: any) => {
   res.json(persons)
@@ -88,12 +92,12 @@ const error = (_req: any, res: any) => {
   res.status(404).send({ error: 'unknown endpoint' })
 }
 app.use(error)
-console.log(appName + 'Routes loaded.')
+console.log(`${appName}Routes loaded.`)
 
 const PORT = process.env.PORT || 3001
-console.log(appName + `Environment variable PORT=${PORT}.`)
+console.log(`${appName}Environment variable PORT=${PORT}.`)
 
 app.listen(PORT, () => {
-  console.log(appName + `Server running on port ${PORT}`)
+  console.log(`${appName}Server running on port ${PORT}`)
 })
-console.log(appName + 'Server init script exits.')
+console.log(`${appName}Server init script exits.`)

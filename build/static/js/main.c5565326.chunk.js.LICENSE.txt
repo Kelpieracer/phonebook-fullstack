@@ -1,0 +1,22 @@
+/**
+ * CRUD phonebook directory application "phonebook-front"
+ * This is the main application.
+ * 
+ * If name or telephone number already exists in the directory, informs the user and does not add the entry.
+ * 
+ * If name or telephone number is missing, does not add an entry.
+ * 
+ * Enter key or Add button adds the entry to the directory.
+ * 
+ * Cursor is moved to the first field (name) after Enter, for easy adding of next entry.
+ * 
+ * In case of a problem, cursor is moved to the input box with the problem.
+ * 
+ * Telephone number and name are not validated, just trimmed.
+ * 
+ * Each entry has a unique id.
+ * 
+ * Entries can be deleted with the trash can icon.
+ * @author Tapio Mäntysalo
+ * @license MIT
+ */
