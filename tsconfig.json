@@ -16,7 +16,7 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "watch": true,
+    "watch": false,
     // "isolatedModules": true,
     "jsx": "react",
     "sourceMap": true,

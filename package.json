@@ -10,7 +10,6 @@
     "watch:debug2": "node_modules/.bin/nodemon --inspect=5858 -e ts,tsx --exec node -r ts-node/register ./index.ts",
     "build": "tsc --project .",
     "tsc": "tsc",
-    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -28,6 +27,7 @@
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.6",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
     "express": "^4.16.2",
     "ts-node": "^8.10.1",
@@ -40,6 +40,7 @@
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
     "eslint": "^6.8.0",
-    "nodemon": "^1.19.4"
+    "nodemon": "^1.19.4",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
   }
 }

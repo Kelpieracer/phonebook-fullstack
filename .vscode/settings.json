@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/5dc63d3c-57fc-49e1-84a2-ef0fa752c849/resourceGroups/Python1/providers/Microsoft.Web/sites/phonebookback",
+    "appService.deploySubpath": ""
+}

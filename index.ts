@@ -5,8 +5,8 @@ import { IPerson } from './client/src/interfaces/IPerson'
 
 import cors from 'cors'
 app.use(cors())
-
 const apiPersonsUri = '/api/persons/'
+
 app.use(bodyParser.json())
 
 let persons: IPerson[] = [
@@ -85,7 +85,7 @@ const error = (_req: any, res: any) => {
 
 app.use(error)
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
