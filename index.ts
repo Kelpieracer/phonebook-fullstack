@@ -1,10 +1,15 @@
 const appName = '(phonebookfront) '
 console.log(`${appName}Server script started.`)
+
 import express from 'express'
-const app = express()
-import bodyParser from 'body-parser'
-import { IPerson } from './client/src/interfaces/IPerson'
+import mongoose from 'mongoose'
 import cors from 'cors'
+import bodyParser from 'body-parser'
+import { connect, disconnect } from "./src/database/database";
+import { IPerson } from './src/database/persons/persons.types'
+import { PersonModel } from './src/database/persons/persons.model'
+
+const app = express()
 
 // Static files https://expressjs.com/en/starter/static-files.html
 app.use(express.static('build'))
@@ -17,75 +22,81 @@ const apiPersonsUri = '/api/persons/'
 app.use(bodyParser.json())
 console.log(`${appName}Body_parser applied.`)
 
-let persons: IPerson[] = [
-  {
-    id: "1",
-    name: "Arto Hellas",
-    tel: "040-123456"
-  },
-  {
-    id: "2",
-    name: "Martti Tienari",
-    tel: "040-123457"
-  },
-  {
-    id: "3",
-    name: "Arto Järvinen",
-    tel: "040-123458"
-  },
-  {
-    id: "4",
-    name: "Lea Maria Kutvonen",
-    tel: "040-123459"
-  }
-]
-console.log(`${appName}Demo data loaded.`)
+/**
+ * Test html page
+ */
+app.get('/test', (_req: any, res: any) => {
+  res.send('<h1>Hello World!</h1><p>Just testing.</p>')
+})
 
-// app.get('/', (_req: any, res: any) => {
-//   res.send('<h1>Hello World!</h1>')
-// })
-
+/**
+ * Read all data
+ */
 app.get(apiPersonsUri, (_req: any, res: any) => {
-  res.json(persons)
+  ; (async () => {
+    const error = connect()
+    if (error) {
+      disconnect()
+      return res.status(500).json(error).end()      
+    }
+    const persons = await PersonModel.findAll()
+    res.json(persons)
+  })()
 })
 
+/**
+ * Find one piece of data by id
+ */
 app.get(apiPersonsUri + ':id', (req: any, res: any) => {
-  const id = req.params.id
-  const person = persons.find(person => person.id === id)
-
-  if (person) {
-    res.json(person)
-  } else {
-    res.status(400).json({ error: 'id not found' }).end()   // Client error
+  const id: string = <string>req.params.id
+  if (!id || id.length !== 24) {
+    return res.status(400).json('Illegal id format').end()
   }
+  ; (async () => {
+    const error = connect()
+    if (error) {
+      disconnect()
+      return res.status(500).json('Cannot open database').end()
+    }
+    const person = await PersonModel.find({ _id: mongoose.Types.ObjectId(id) })
+    res.json(person).end()
+  })()
 })
 
-const generateId = (): string => {
-  const id = Math.random()
-  return id.toString()
-}
-
+/**
+ * Create new
+ */
 app.post(apiPersonsUri, (req: any, res: any) => {
   const person: IPerson = {
     name: req.body.name.trim(),
     tel: req.body.tel.trim(),
+    _id: null
   }
   if (!person.name || !person.tel) {
     res.status(400).json({ error: 'content format does not match' }).end()   // Client error
   }
-  if (persons.find(a => a.name === person.name)) {
-    res.status(400).json({ error: 'name must be unique' }).end()   // Client error
-  }
-  person.id = generateId()
-  persons.push(person)
-  res.json(person)
+  (async () => {
+    const error = connect()
+    if (error) {
+      disconnect()
+      return res.status(500).json('Cannot open database').end()
+    }
+    await PersonModel.findOneOrCreate(person);
+    res.json(person).end()
+  })()
 })
 
 app.delete(apiPersonsUri + ':id', (req: any, res: any) => {
-  const id = req.params.id
-  persons = persons.filter(person => person.id !== id)
-
-  res.status(204).end()
+  (async () => {
+    const id = req.params.id
+    const error = connect()
+    if (error) {
+      disconnect()
+      return res.status(500).json('Cannot open database').end()
+    }
+    await PersonModel.deleteOne({ _id: id })
+    res.status(204).end()
+  })()
 })
 
 const error = (_req: any, res: any) => {
