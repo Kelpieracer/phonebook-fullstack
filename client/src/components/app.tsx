@@ -17,7 +17,9 @@ import nameExists, { telExists } from '../helpers/directory-helpers'
 import PopUp from './popup'
 import DirectoryTable from './directory-table'
 
-const serverUri = 'http://localhost:3001/persons/'
+const serverUri = window.location.href === 'http://localhost:3000/'
+    ? 'http://localhost:3001/api/persons/' : 'https://phonebookback.azurewebsites.net/api/persons/'
+console.log(`Backend api: ${serverUri}`)
 
 /**
  * CRUD phonebook directory application "phonebook-front"
@@ -64,10 +66,10 @@ const App = () => {
             .delete(serverUri + id)
             .then(response => {
                 console.log('deleted response from db: ' + response.statusText)
-                setPersons(persons.filter(person => person.id !== id))
+                setPersons(persons.filter(person => person._id !== id))
             })
             .catch(err => {
-                alert('Database connection error: ' + err)
+                alert('Backend ' + err)
                 throw new Error(err)
             }
             )
@@ -86,10 +88,9 @@ const App = () => {
                 setPersons(response.data)
             })
             .catch(err => {
-                alert('Database connection error: ' + err)
+                alert('Backend ' + err)
                 throw new Error(err)
-            }
-            )
+            })
     }
     console.log('useEffect')
     useEffect(readPersons, [])     // Empty array tells react that it is necessary to call this only once => componentDidMount effect.
@@ -136,11 +137,11 @@ const App = () => {
                     .post(serverUri, newPersonItem)
                     .then(response => {
                         console.log('created to database: ' + response.statusText)
-                        newPersonItem.id = response.data.id
+                        newPersonItem._id = response.data.id
                         setPersons(persons.concat(newPersonItem))
                     })
                     .catch(err => {
-                        alert('Database connection error: ' + err)
+                        alert('Backend ' + err)
                         throw new Error(err)
                     }
                     )

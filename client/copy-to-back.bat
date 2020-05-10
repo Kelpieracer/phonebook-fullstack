@@ -1,0 +1,1 @@
+xcopy build ..\phonebook-back\build /E /Y

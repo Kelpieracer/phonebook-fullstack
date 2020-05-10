@@ -16,7 +16,7 @@ const DirectoryTable = ({ persons, deleteCallBack }:
          */
         deleteCallBack: (id: string) => void
     }) => {
-    console.log(persons.map(person => person.id + ":" + person.name).join(' , '))
+    console.log(persons.map(person => person._id + ":" + person.name).join(' , '))
     const [showDeletePopup, setShowDeletePopup] = useState(false);
     const [personToDelete, setPersonToDelete] = useState<Person>()
     const [personTextToDelete, setPersonTextToDelete] = useState('')
@@ -33,7 +33,7 @@ const DirectoryTable = ({ persons, deleteCallBack }:
     const handleDeleteClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         if (event.currentTarget) {
             const id = event.currentTarget.id
-            const person = persons.find(person => person.id === id)
+            const person = persons.find(person => person._id === id)
             setPersonToDelete(person)
             setPersonTextToDelete(person ? `${person.name} / ${person.tel}` : '')
             setShowDeletePopup(true)
@@ -44,8 +44,8 @@ const DirectoryTable = ({ persons, deleteCallBack }:
      * Callback link to confirmation popup of one person from database - this actually calls the delete person
      */
     const deletePerson = () => {
-        if (personToDelete && personToDelete.id) {
-            deleteCallBack(personToDelete.id)
+        if (personToDelete && personToDelete._id) {
+            deleteCallBack(personToDelete._id)
         }
         handleClose()
     }
@@ -70,7 +70,7 @@ const DirectoryTable = ({ persons, deleteCallBack }:
                 </thead>
                 <tbody>
                     {persons.map(person =>
-                        <tr key={person.id}>
+                        <tr key={person._id}>
                             <th>
                                 {person.name}
                             </th>
@@ -78,7 +78,7 @@ const DirectoryTable = ({ persons, deleteCallBack }:
                                 {person.tel}
                             </td>
                             <td>
-                                {<Button size="sm" variant="light" id={person.id} onClick={handleDeleteClick}><FaTrash /></Button>}
+                                {<Button size="sm" variant="light" id={person._id} onClick={handleDeleteClick}><FaTrash /></Button>}
                             </td>
                         </tr>)}
                 </tbody>

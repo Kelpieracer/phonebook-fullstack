@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "Launch Chrome against localhost",
             "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}/client"
+            "webRoot": "${workspaceFolder}"
         },
         {
             "type": "chrome",
@@ -17,14 +17,14 @@
             "name": "Attach to Chrome against localhost",
             "url": "http://localhost",
             "port": 3000,
-            "webRoot": "${workspaceFolder}/client"
+            "webRoot": "${workspaceFolder}"
         },
         {
             "type": "node",
             "request": "launch",
-            "name": "Client Jest All",
-            "program": "${workspaceFolder}\\client\\node_modules\\jest\\bin\\jest.js",
-            "cwd": "${workspaceFolder}/client",
+            "name": "Jest All",
+            "program": "${workspaceFolder}\\node_modules\\jest\\bin\\jest.js",
+            "cwd": "${workspaceFolder}/src",
             "args": [
                 "test",
                 "--testMatch=\"**/+(*.)+(spec|test).+(ts|js)?(x)\"",
@@ -37,8 +37,8 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Client Jest Current File",
-            "program": "${workspaceRoot}\\client\\node_modules\\jest\\bin\\jest.js",
+            "name": "Jest Current File",
+            "program": "${workspaceRoot}\\node_modules\\jest\\bin\\jest.js",
             //"cwd": "${workspaceFolder}",
             "args": [
                 "test",
@@ -53,8 +53,8 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Client Jest Tests",
-            "program": "${workspaceRoot}\\client\\node_modules\\jest\\bin\\jest.js",
+            "name": "Jest Tests",
+            "program": "${workspaceRoot}\\node_modules\\jest\\bin\\jest.js",
             "args": [
                 "-i"
             ],
@@ -63,10 +63,10 @@
             "outFiles": [
                 "${workspaceRoot}/dist/**/*"
             ],
-            "envFile": "${workspaceRoot}/client/.env"
+            "envFile": "${workspaceRoot}/.env"
         },
         {
-            "name": "Client Debug Jest", // name to show in Debug config picker
+            "name": "Debug Jest", // name to show in Debug config picker
             "type": "node",
             "request": "launch",
             "address": "localhost",
@@ -75,7 +75,7 @@
             "sourceMaps": true, // if you are using Babel or TS, make this true
             // you can add another arg to pattern-match limit the tests, just as when normally running jest
             "runtimeArgs": [
-                "${workspaceRoot}/client/node_modules/jest/bin/jest.js",
+                "${workspaceRoot}/node_modules/jest/bin/jest.js",
                 "--runInBand", // https://facebook.github.io/jest/docs/en/cli.html#runinband - don't parallelize
                 "--no-cache" // https://facebook.github.io/jest/docs/en/cli.html#cache - just avoid caching issues
             ],
@@ -85,26 +85,3 @@
         }
     ]
 }
-
-// {
-//     // Use IntelliSense to learn about possible attributes.
-//     // Hover to view descriptions of existing attributes.
-//     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-//     "version": "0.2.0",
-//     "configurations": [
-//         {
-//             // Use: "npm run watch:debug" first, then attach debugger, if you want program to stop in the beginning
-//             // Use: "npm run watch:debug2" first, then attach debugger, if you want program to run
-//             // Result: autosave and debugging work! Some strange issues with break-points
-//             "name": "Attach: npm run watch:debug",
-//             "type": "node",
-//             "request": "attach",
-//             "restart": true,
-//             "port": 5858,
-//             "outFiles": [
-//                 "${workspaceFolder}\\out"
-//             ],
-//             "sourceMaps": true
-//         },
-//     ]
-// }
