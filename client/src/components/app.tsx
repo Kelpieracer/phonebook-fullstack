@@ -78,10 +78,11 @@ const App = () => {
      *  Fetch the telephone directory from database
      * This is connected to componentDidMount by useEffect()
      */
-    const readPersons = function () {
-        console.log('readPersons')
+    const readPersons = function (textToSearch: string | undefined) {
+        const searchText = (!textToSearch || textToSearch === '') ? '_' : textToSearch
+        console.log(`readPersons: ${searchText} `)
         axios
-            .get(serverUri)
+            .get(`${serverUri}search/${searchText}`)
             .then(response => {
                 console.log('read response from db: ' + response.statusText)
                 setPersons(response.data)
@@ -92,7 +93,7 @@ const App = () => {
             })
     }
     console.log('useEffect')
-    useEffect(readPersons, [])     // Empty array tells react that it is necessary to call this only once => componentDidMount effect.
+    useEffect(() => { readPersons('') }, [])     // Empty array tells react that it is necessary to call this only once => componentDidMount effect.
 
     /**
      * CREATE a new entry to the telephone directory
@@ -136,7 +137,7 @@ const App = () => {
                     .post(serverUri, newPersonItem)
                     .then(response => {
                         console.log('created to database: ' + response.statusText)
-                        readPersons()       // Database will allocate the id => refresh all!
+                        searchPersons()       // Database will allocate the id => refresh all!
                     })
                     .catch(err => {
                         alert('Backend ' + err)
@@ -162,6 +163,16 @@ const App = () => {
     }
 
     /**
+     * Each keypress into search box will launch a search query
+     * @param event key event
+     */
+    const searchPersons = () => {
+        const searchElement = (document.getElementById('search-box') as HTMLInputElement)
+        const searchText = searchElement.value.trim()
+        readPersons(searchText)
+    }
+
+    /**
      * These are predefined texts for the error popups
      */
     const nameExistsHtml = <div>Name <em>{newPerson?.name}</em> already exists in directory</div>
@@ -183,22 +194,34 @@ const App = () => {
             <Row>
                 <Col md="auto">
                     <Form.Group>
-                        <Form.Label>New name</Form.Label>
-                        <Form.Control id="input-name" type="text" placeholder="Enter new name" onKeyDown={checkKey} />
-                        <Form.Text className="text-muted">
-                            We'll never say your name aloud.
-                        </Form.Text>
-                        <Form.Label>Phone number</Form.Label>
-                        <Form.Control id="input-tel" type="tel" placeholder="Enter phone number" onKeyDown={checkKey} />
-                        <Form.Text className="text-muted">
-                            Any number-like entry will do.
-                        </Form.Text>
+                        <Form.Row>
+                            <Col>
+                                <Form.Label>New name</Form.Label>
+                                <Form.Control id="input-name" type="text" placeholder="Enter new name" onKeyDown={checkKey} />
+                                <Form.Text className="text-muted">We'll never say your name aloud.</Form.Text>
+                            </Col>
+                        </Form.Row>
+                        <Form.Row>
+                            <Col>
+                                <Form.Label>Phone number</Form.Label>
+                                <Form.Control id="input-tel" type="tel" placeholder="Enter phone number" onKeyDown={checkKey} />
+                                <Form.Text className="text-muted">Any number-like entry will do.</Form.Text>
+                            </Col>
+                        </Form.Row>
+                        <Form.Row>
+                            <Col>
+                                <Button onClick={createPerson}>Add</Button>
+                            </Col>
+                        </Form.Row>
                     </Form.Group>
-                </Col>
-            </Row>
-            <Row>
-                <Col md="auto">
-                    <Button onClick={createPerson}>Add</Button>
+                    <Form.Group>
+                        <Form.Row>
+                            <Col>
+                                <Form.Label>Search</Form.Label>
+                                <Form.Control id="search-box" type="text" placeholder="Start typing to limit search results" onKeyUp={searchPersons} />
+                            </Col>
+                        </Form.Row>
+                    </Form.Group>
                 </Col>
             </Row>
             <Row>
