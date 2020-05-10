@@ -27,7 +27,8 @@
     "experimentalDecorators": true,
     // "incremental": true,
     "noFallthroughCasesInSwitch": true,
-    "noEmit": false
+    "noEmit": false,
+    "typeRoots": [ "./src/types", "./node_modules/@types"]
   },
   "include": [
     "src/**/*", "index.ts"
@@ -39,6 +40,7 @@
     "scripts",
     "acceptance-tests",
     "webpack",
+    "src/types"
     // "jest",
     // "src/setupTests.ts"
   ]

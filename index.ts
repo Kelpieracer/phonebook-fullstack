@@ -12,18 +12,18 @@ import os from 'os'
 
 const app = express()
 
-// Static files https://expressjs.com/en/starter/static-files.html
-app.use(express.static('build'))
-console.log(`${appName}Static service applied.`)
-
-
-if (os.hostname().includes("local")) {
+console.log(`${appName}Hostname: ${os.hostname()}`)
+if (os.hostname().includes('LAPTOP')) {
   app.use(cors())
   console.log(`${appName}CORS applied.`)
 }
 else {
   console.log(`${appName}No CORS needed.`)
 }
+
+// Static files https://expressjs.com/en/starter/static-files.html
+app.use(express.static('build'))
+console.log(`${appName}Static service applied`)
 
 const apiPersonsUri = '/api/persons/'
 
@@ -33,7 +33,7 @@ console.log(`${appName}Body_parser applied.`)
 /**
  * Test html page
  */
-app.get('/test', (_req: any, res: any) => {
+app.get('/test', (_req: Request, res: Response) => {
   res.send('<h1>Hello World!</h1><p>Just testing.</p>')
 })
 
@@ -154,7 +154,7 @@ app.delete(apiPersonsUri + ':id', (req: Request, res: Response) => {
   })()
 })
 
-const error = (_req: any, res: any) => {
+const error = (_req: Request, res: Response) => {
   res.status(404).send({ error: 'unknown endpoint' })
 }
 app.use(error)
