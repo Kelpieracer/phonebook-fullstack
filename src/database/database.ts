@@ -13,7 +13,9 @@ export const connect = (): string | undefined => {
   // add your own uri below
   const uri = process.env.MONGODB_URI
   if (!uri) {
-    return 'Database uri is not valid'
+    const error = 'Database uri is not valid'
+    console.log(error)
+    return error
   }
 
   if (database) {
@@ -34,6 +36,7 @@ export const connect = (): string | undefined => {
   })
 
   database.on('error', (error: any) => {
+    console.log(error.toString())
     return error.toString()
   })
 
