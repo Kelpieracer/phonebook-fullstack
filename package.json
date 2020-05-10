@@ -5,8 +5,8 @@
   "main": "index.ts",
   "scripts": {
     "dev": "node_modules/.bin/nodemon --watch . -e ts --exec node_modules/.bin/ts-node index.ts",
-    "start": "node out/index.js",
-    "watch:debug": "node_modules/.bin/nodemon --inspect-brk=5858 -e ts,tsx --exec node -r ts-node/register ./index.ts",
+    "start": "ts-node index.ts",
+    "watch:debug": "node_modules/.bin/nodemon --inspect=5858 -e ts,tsx --exec node -r ts-node/register ./index.ts",
     "watch:debug2": "node_modules/.bin/nodemon --inspect-brk=5858 -e ts,tsx --exec node -r ts-node/register ./src/scripts/createDummyPersons.ts",
     "build": "tsc --project .",
     "tsc": "tsc",

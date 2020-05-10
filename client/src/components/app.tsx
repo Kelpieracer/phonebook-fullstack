@@ -66,13 +66,12 @@ const App = () => {
             .delete(serverUri + id)
             .then(response => {
                 console.log('deleted response from db: ' + response.statusText)
-                setPersons(persons.filter(person => person._id !== id))
+                setPersons(persons.filter(person => person._id !== id))     // Trustig that no one else is using the db
             })
             .catch(err => {
                 alert('Backend ' + err)
                 throw new Error(err)
-            }
-            )
+            })
     }
 
     /**
@@ -137,8 +136,7 @@ const App = () => {
                     .post(serverUri, newPersonItem)
                     .then(response => {
                         console.log('created to database: ' + response.statusText)
-                        newPersonItem._id = response.data.id
-                        setPersons(persons.concat(newPersonItem))
+                        readPersons()       // Database will allocate the id => refresh all!
                     })
                     .catch(err => {
                         alert('Backend ' + err)
