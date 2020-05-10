@@ -93,7 +93,6 @@ const App = () => {
             })
     }
     console.log('useEffect')
-    useEffect(() => { readPersons('') }, [])     // Empty array tells react that it is necessary to call this only once => componentDidMount effect.
 
     /**
      * CREATE a new entry to the telephone directory
@@ -132,24 +131,21 @@ const App = () => {
                 const newPersonItem: Person = { name: name, tel: tel }
                 nameElement.value = ''
                 telElement.value = ''
-                nameElement.focus()
                 axios
                     .post(serverUri, newPersonItem)
                     .then(response => {
                         console.log('created to database: ' + response.statusText)
                         searchPersons()       // Database will allocate the id => refresh all!
+                        nameElement.focus()
                     })
                     .catch(err => {
                         alert('Backend ' + err)
                         throw new Error(err)
-                    }
-                    )
+                    })
             }
             setShowPopUp('NONE')
         }
     }
-
-
 
     /**
      * Make enter key to "submit" also, in addition to "Add" button
@@ -170,7 +166,9 @@ const App = () => {
         const searchElement = (document.getElementById('search-box') as HTMLInputElement)
         const searchText = searchElement.value.trim()
         readPersons(searchText)
+        searchElement.focus()
     }
+    useEffect(searchPersons, [])     // Empty array tells react that it is necessary to call this only once => componentDidMount effect.
 
     /**
      * These are predefined texts for the error popups
@@ -184,53 +182,47 @@ const App = () => {
     console.log('render')
     return (
         <Container>
+            <p></p>
             <PopUp title="Duplicate entry" main={showPopUp === 'NAME_EXISTS' ? nameExistsHtml : telExistsHtml}
                 button="Ok" show={showPopUp !== 'NONE'} />
             <Row>
-                <Col md="auto">
+                <Col xl="auto">
                     <h2>Telephone Directory</h2>
                 </Col>
             </Row>
+            <Form.Group>
+                <Row>
+                    <Col xl="auto">
+                        <Form.Label>New name</Form.Label>
+                        <Form.Control size="sm" id="input-name" type="text" placeholder="Enter new name" onKeyDown={checkKey} />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xl="auto">
+                        <Form.Label>Phone number</Form.Label>
+                        <Form.Control size="sm" id="input-tel" type="tel" placeholder="Enter phone number" onKeyDown={checkKey} />
+                    </Col>
+                    <Col xl="auto">
+                        <p></p>
+                        <Button size="sm" onClick={createPerson}>Add</Button>
+                    </Col>
+                </Row>
+            </Form.Group>
+            <Form.Group>
+                <Row>
+                    <Col xl="auto">
+                        <Form.Label>Search</Form.Label>
+                        <Form.Control id="search-box" type="text" placeholder="Start typing to limit search results" onKeyUp={searchPersons} />
+                    </Col>
+                </Row>
+            </Form.Group>
             <Row>
-                <Col md="auto">
-                    <Form.Group>
-                        <Form.Row>
-                            <Col>
-                                <Form.Label>New name</Form.Label>
-                                <Form.Control id="input-name" type="text" placeholder="Enter new name" onKeyDown={checkKey} />
-                                <Form.Text className="text-muted">We'll never say your name aloud.</Form.Text>
-                            </Col>
-                        </Form.Row>
-                        <Form.Row>
-                            <Col>
-                                <Form.Label>Phone number</Form.Label>
-                                <Form.Control id="input-tel" type="tel" placeholder="Enter phone number" onKeyDown={checkKey} />
-                                <Form.Text className="text-muted">Any number-like entry will do.</Form.Text>
-                            </Col>
-                        </Form.Row>
-                        <Form.Row>
-                            <Col>
-                                <Button onClick={createPerson}>Add</Button>
-                            </Col>
-                        </Form.Row>
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Row>
-                            <Col>
-                                <Form.Label>Search</Form.Label>
-                                <Form.Control id="search-box" type="text" placeholder="Start typing to limit search results" onKeyUp={searchPersons} />
-                            </Col>
-                        </Form.Row>
-                    </Form.Group>
-                </Col>
-            </Row>
-            <Row>
-                <Col md="auto">
+                <Col xl="auto">
                     <p></p>
                 </Col>
             </Row>
             <Row>
-                <Col md="auto">
+                <Col xl="auto">
                     <DirectoryTable persons={persons} deleteCallBack={deletePerson} />
                 </Col>
             </Row>

@@ -45,28 +45,30 @@ app.get(apiPersonsUri, (_req: any, res: any) => {
 })
 
 /**
- * Search data
+ * Search text
  */
 app.get(apiPersonsUri + 'search/:text', (req: any, res: any) => {
   let text: string = <string>req.params.text
-  if(text === '_') {
+  if (text === '_') {
     text = ''    // Search all
   }
-    ; (async () => {
-      const error = connect()
-      if (error) {
-        disconnect()
-        return res.status(500).json('Cannot open database').end()
-      }
-      // const person = await PersonModel.find( {$or: [{ name: new RegExp(`/.*${text}.*/`) }, { tel: new RegExp(`/.*${text}.*/`) }]})
-      const searchStringUC = `.*${text.toUpperCase()}.*`
-      const searchStringLC = `.*${text.toLowerCase()}.*`
-      const regExpUC = new RegExp(searchStringUC)
-      const regExpLC = new RegExp(searchStringLC)
-      const searchParameters = text === '' ? {} : { $or: [{ name: regExpUC }, { name: regExpLC }, { tel: regExpUC }, { tel: regExpLC }], }
-      const person = await PersonModel.find(searchParameters)
-      res.json(person).end()
-    })()
+  ; (async () => {
+    const error = connect()
+    if (error) {
+      disconnect()
+      return res.status(500).json('Cannot open database').end()
+    }
+    const searchString = `${text.toUpperCase()}.*`
+    const regExp = new RegExp(searchString, 'i')
+    const searchParameters = text === '' ? {} : {
+      $or: [
+        { name: regExp },
+        { tel: regExp },
+      ]
+    }
+    const person = await PersonModel.find(searchParameters)
+    res.json(person).end()
+  })()
 })
 
 /**
