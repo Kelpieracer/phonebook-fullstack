@@ -12,13 +12,14 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import Dropdown from 'react-bootstrap/Dropdown'
 import { Person } from '../types/directory-types'
 import nameExists, { telExists } from '../helpers/directory-helpers'
 import PopUp from './popup'
 import DirectoryTable from './directory-table'
 
 const serverUri = window.location.href === 'http://localhost:3000/'
-    ? 'http://localhost:3001/api/persons/' : 'https://phonebookback.azurewebsites.net/api/persons/'
+    ? 'http://localhost:3001/api/persons/' : '/api/persons/'
 console.log(`Backend api: ${serverUri}`)
 
 /**
@@ -181,7 +182,7 @@ const App = () => {
      */
     console.log('render')
     return (
-        <Container>
+        <Container fluid="xl">
             <p></p>
             <PopUp title="Duplicate entry" main={showPopUp === 'NAME_EXISTS' ? nameExistsHtml : telExistsHtml}
                 button="Ok" show={showPopUp !== 'NONE'} />
@@ -203,8 +204,18 @@ const App = () => {
                         <Form.Control size="sm" id="input-tel" type="tel" placeholder="Enter phone number" onKeyDown={checkKey} />
                     </Col>
                     <Col xl="auto">
-                        <p></p>
                         <Button size="sm" onClick={createPerson}>Add</Button>
+                        <p></p>
+                        <p></p>
+                        <Dropdown>
+                            <Dropdown.Toggle size="sm" variant="success" id="dropdown-basic">
+                                Docs
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item href="/client-doc">Client documentation</Dropdown.Item>
+                                <Dropdown.Item href="/server-doc">Server documentation</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </Col>
                 </Row>
             </Form.Group>
