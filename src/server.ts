@@ -3,7 +3,6 @@ console.log(`${appName}Server script started.`)
 
 import express, { Request, Response } from 'express'
 import mongoose from 'mongoose'
-import cors from 'cors'
 import bodyParser from 'body-parser'
 import { connect, disconnect } from "./database/database";
 import { IPerson } from './database/persons/persons.types'
@@ -13,16 +12,9 @@ import os from 'os'
 const app = express()
 
 console.log(`${appName}Hostname: ${os.hostname()}`)
-if (os.hostname().includes('LAPTOP')) {
-  app.use(cors())
-  console.log(`${appName}CORS applied.`)
-}
-else {
-  console.log(`${appName}No CORS needed.`)
-}
 
 // Static files https://expressjs.com/en/starter/static-files.html
-app.use(express.static('build'))
+app.use(express.static('client/build'))
 console.log(`${appName}Static service applied`)
 
 const apiPersonsUri = '/api/persons/'

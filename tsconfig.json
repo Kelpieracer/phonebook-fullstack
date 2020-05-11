@@ -10,7 +10,6 @@
     "target": "es2019",
     "allowJs": true,
     "skipLibCheck": true,
-    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -27,11 +26,12 @@
     "experimentalDecorators": true,
     // "incremental": true,
     "noFallthroughCasesInSwitch": true,
-    "noEmit": false,
-    "typeRoots": [ "./src/types", "./node_modules/@types"]
+    "noEmit": true,
+    "typeRoots": [ "./src/types", "./node_modules/@types"],
+    "esModuleInterop": true,
   },
   "include": [
-    "src/**/*", "src/index.ts"
+    "./src/server.ts"
   ],
   "exclude": [
     "node_modules",

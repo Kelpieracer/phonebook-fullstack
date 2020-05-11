@@ -28,6 +28,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
+    "client-doc": "typedoc --out build/client-doc client/src --plugin none",
     "test": "jest",
     "test:watch": "jest --watch",
     "server": "json-server -p3001 db.json"
