@@ -228,7 +228,7 @@ const App = () => {
                 </Row>
             </Form.Group>
             <Row>
-                <Col xl="auto">
+                <Col xl="auto"> 
                     <p></p>
                 </Col>
             </Row>
