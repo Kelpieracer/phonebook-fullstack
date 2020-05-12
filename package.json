@@ -1,11 +1,11 @@
 {
-  "name": "phonebookback",
+  "name": "phonebook",
   "version": "3.8.0",
   "description": "",
   "main": "index.ts",
   "scripts": {
     "dev": "cd client && start",
-    "start": "ts-node src/server.ts",
+    "start": "node out/server.js",
     "watch:debug": "node_modules/.bin/nodemon --watch ./src --inspect=5858 -e ts,tsx --exec node -r ts-node/register index.ts",
     "server-doc": "typedoc --out client/build/server-doc ./src --plugin none --esModuleInterop",
     "build-server": "tsc -p . && npm run-script server-doc",
