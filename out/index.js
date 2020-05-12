@@ -13,15 +13,18 @@ const persons_model_1 = require("./src/database/persons/persons.model");
 const os_1 = __importDefault(require("os"));
 const cors_1 = __importDefault(require("cors"));
 const app = express_1.default();
+// CORS needed only locally
 console.log(`${appName}Hostname: ${os_1.default.hostname()}`);
 if (os_1.default.hostname().includes('LAPTOP')) {
     app.use(cors_1.default());
     console.log(`${appName}Using CORS`);
 }
-// Static files https://expressjs.com/en/starter/static-files.html
+// Static files served at
 app.use(express_1.default.static('client/build'));
 console.log(`${appName}Static service applied`);
+// API's served at
 const apiPersonsUri = '/api/persons/';
+// Convert request body to json
 app.use(body_parser_1.default.json());
 console.log(`${appName}Body_parser applied.`);
 /**
@@ -31,7 +34,7 @@ app.get('/test', (_req, res) => {
     res.send('<h1>Hello World!</h1><p>Just testing.</p>');
 });
 /**
- * Read all data
+ * Read all data in directory
  */
 app.get(apiPersonsUri, (_req, res) => {
     (async () => {
@@ -142,11 +145,19 @@ app.delete(apiPersonsUri + ':id', (req, res) => {
         });
     })();
 });
+/**
+ * Unknown route requeste
+ * @param _req not used
+ * @param res response
+ */
 const error = (_req, res) => {
     res.status(404).send({ error: 'unknown endpoint' });
 };
 app.use(error);
 console.log(`${appName}Routes loaded.`);
+/**
+ * Set server port
+ */
 const PORT = process.env.PORT || 3001;
 console.log(`${appName}Environment variable PORT=${PORT}.`);
 app.listen(PORT, () => {

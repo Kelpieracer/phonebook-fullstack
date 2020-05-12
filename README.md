@@ -31,7 +31,7 @@ CORS is used only when host name contains 'LAPTOP', i.e. locally on authors mach
 > npm start
 ```
 ### Build deployment version
-Front-end, backend and source documentation
+Front-end, backend and source documentation. Do this before deployment. And push to Git.
 ```
 > npm run build-all
 ```
@@ -43,6 +43,11 @@ Front-end only (with docs)
 ```
 > npm run build-client
 ```
+Cloud deployment server will use
+```
+> npm run build
+> npm start
+```
 Note that building frontend clears backend docs
 
 ### Source code documentation
@@ -51,6 +56,7 @@ Click **Documentation** in the application
 ### What else?
 * Typescript was used in both backend and frontend.
 * Bootstrap-react was used for UI.
+* Azure App Service used as platform.
 * I tried to follow recommended practices in backend and frontend as much as I could find info.
 * Some small front-end methods have jest tests, but this was rather trivial project code-wise (not configuration-wise), so I didn't do more unit tests.
 
