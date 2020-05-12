@@ -43,7 +43,7 @@ Front-end only (with docs)
 ```
 > npm run build-client
 ```
-    Note that building frontend clears backend docs
+Note that building frontend clears backend docs
 
 ### Source code documentation
 Click **Documentation** in the application
