@@ -4,9 +4,9 @@ console.log(`${appName}Server script started.`)
 import express, { Request, Response } from 'express'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
-import { connect, disconnect } from "./database/database";
-import { IPerson } from './database/persons/persons.types'
-import { PersonModel } from './database/persons/persons.model'
+import { connect, disconnect } from "./src/database/database";
+import { IPerson } from './src/database/persons/persons.types'
+import { PersonModel } from './src/database/persons/persons.model'
 import os from 'os'
 
 const app = express()
