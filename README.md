@@ -1,4 +1,4 @@
-## [<<< BACK](http://phonebook-fs.azurewebsites.net/)
+## [<<< BACK](http://phonebook-fs.azurewebsites.net/) ##### (to application)
 
 # phonebook
 
@@ -15,29 +15,34 @@ https://gitlab.utu.fi/dfte/fullstack-2020/web-basics/phonebook-fullstack
 
 ### Debugging
 Backend: 
-
-> Launch Backend 
-
+```
+Launch Backend 
+```
 Frontend: 
-> > npm client
->Launch Frontend
-
+```> npm client
+Launch Frontend
+```
 You can debug and hit breakpoints in both backend and frontend simultaneously
 
 CORS is used only when host name contains 'LAPTOP', i.e. locally on authors machine
 
 ### Run deployment version locally
+```
 > npm start
-
+```
 ### Build deployment version
 Front-end, backend and source documentation
+```
 > npm run build-all
-
+```
 Back-end only (with docs)
+```
 > npm run build-server
-
+```
 Front-end only (with docs)
+```
 > npm run build-client
+```
     Note that building frontend clears backend docs
 
 ### Source code documentation
