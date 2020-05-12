@@ -8,7 +8,7 @@
     "start": "node out/index.js",
     "watch:debug": "node_modules/.bin/nodemon --watch ./src --inspect=5858 -e ts,tsx --exec node -r ts-node/register index.ts",
     "server-doc": "typedoc --out client/build/server-doc index.ts --plugin none --esModuleInterop",
-    "build-server": "tsc -p . && npm run-script server-doc",
+    "build-server": "tsc -p . --outDir out && npm run-script server-doc",
     "build-client": "cd client && npm run build && npm run-script client-doc",
     "build": "npm run-script build-client && npm run-script build-server",
     "tsc": "tsc",
