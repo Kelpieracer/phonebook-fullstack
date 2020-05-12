@@ -1,4 +1,4 @@
-const appName = '(phonebookfront) '
+const appName = '(phonebookback) '
 console.log(`${appName}Server script started.`)
 
 import express, { Request, Response } from 'express'
