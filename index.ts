@@ -12,18 +12,21 @@ import cors from 'cors'
 
 const app = express()
 
+// CORS needed only locally
 console.log(`${appName}Hostname: ${os.hostname()}`)
 if(os.hostname().includes('LAPTOP')) {
   app.use(cors())
   console.log(`${appName}Using CORS`)
 }
 
-// Static files https://expressjs.com/en/starter/static-files.html
+// Static files served at
 app.use(express.static('client/build'))
 console.log(`${appName}Static service applied`)
 
+// API's served at
 const apiPersonsUri = '/api/persons/'
 
+// Convert request body to json
 app.use(bodyParser.json())
 console.log(`${appName}Body_parser applied.`)
 
@@ -35,7 +38,7 @@ app.get('/test', (_req: Request, res: Response) => {
 })
 
 /**
- * Read all data
+ * Read all data in directory
  */
 app.get(apiPersonsUri, (_req: Request, res: Response) => {
   (async () => {
@@ -151,16 +154,24 @@ app.delete(apiPersonsUri + ':id', (req: Request, res: Response) => {
   })()
 })
 
+/**
+ * Unknown route requeste
+ * @param _req not used
+ * @param res response
+ */
 const error = (_req: Request, res: Response) => {
   res.status(404).send({ error: 'unknown endpoint' })
 }
 app.use(error)
 console.log(`${appName}Routes loaded.`)
 
+/**
+ * Set server port
+ */
 const PORT = process.env.PORT || 3001
 console.log(`${appName}Environment variable PORT=${PORT}.`)
-
 app.listen(PORT, () => {
   console.log(`${appName}Server running on port ${PORT}`)
 })
+
 console.log(`${appName}Server init script exits.`)

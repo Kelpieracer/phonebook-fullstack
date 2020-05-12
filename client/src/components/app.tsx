@@ -19,10 +19,6 @@ import PopUp from './popup'
 import DirectoryTable from './directory-table'
 
 
-const serverUri = window.location.href === 'http://localhost:3000/'
-    ? 'http://localhost:3001/api/persons/' : '/api/persons/'
-console.log(`Backend api: ${serverUri}`)
-
 /**
  * CRUD phonebook directory application "phonebook-front"
  * This is the main application.
@@ -57,6 +53,14 @@ const App = () => {
     const [newPerson, setNewPerson] = useState<Person>()
 
     /**
+     * Backend server address solving
+     */
+    const serverUri = window.location.href === 'http://localhost:3000/'
+        ? 'http://localhost:3001/api/persons/' : '/api/persons/'
+    console.log(`Backend api: ${serverUri}`)
+
+
+    /**
      *  Fetch the telephone directory from database
      * This is connected to componentDidMount by useEffect()
      */
@@ -72,7 +76,6 @@ const App = () => {
             })
             .catch(err => {
                 alert('Backend ' + err)
-                throw new Error(err)
             })
     }
 
@@ -91,7 +94,6 @@ const App = () => {
             })
             .catch(err => {
                 alert('Backend ' + err)
-                throw new Error(err)
             })
     }
     console.log('useEffect')
@@ -142,7 +144,6 @@ const App = () => {
                     })
                     .catch(err => {
                         alert('Backend ' + err)
-                        throw new Error(err)
                     })
             }
             setShowPopUp('NONE')
@@ -179,11 +180,18 @@ const App = () => {
     const telExistsHtml = <div>Phone number <em>{newPerson?.tel}</em> already exists in directory</div>
 
     /**
+     * Format container
+     */
+    const contStyle = {
+        maxWidth: "600px"
+    }
+
+     /**
      * render
      */
     console.log('render')
     return (
-        <Container fluid="xl">
+        <Container style={contStyle}>
             <Row>
                 <Col>
                     <p></p>
@@ -192,7 +200,7 @@ const App = () => {
                 </Col>
             </Row>
             <Row>
-                <Col xl="auto">
+                <Col>
                     <h2>Telephone Directory</h2>
                 </Col>
             </Row>
@@ -200,13 +208,13 @@ const App = () => {
                 <Col>
                     <Form.Group>
                         <Row>
-                            <Col xl="auto">
+                            <Col>
                                 <Form.Label>New name</Form.Label>
                                 <Form.Control size="sm" id="input-name" type="text" placeholder="Enter new name" onKeyDown={checkKey} />
                             </Col>
                         </Row>
                         <Row>
-                            <Col xl="auto">
+                            <Col>
                                 <Form.Label>Phone number</Form.Label>
                                 <Form.Control size="sm" id="input-tel" type="tel" placeholder="Enter phone number" onKeyDown={checkKey} />
                             </Col>
@@ -215,13 +223,13 @@ const App = () => {
                 </Col>
             </Row>
             <Row>
-                <Col>
-                    <Button size="sm" onClick={createPerson}>Add</Button>
+                <Col xs={{ span: 3, offset: 3 }}>
+                    <Button size="sm" onClick={createPerson}>Add person</Button>
                 </Col>
-                <Col>
+                <Col xs={{ span: 3, offset: 1 }}>
                     <Dropdown>
-                        <Dropdown.Toggle size="sm" variant="success" id="dropdown-basic">
-                            Docs
+                        <Dropdown.Toggle size="sm" variant="info" id="dropdown-basic">
+                            Documentation
                             </Dropdown.Toggle>
                         <Dropdown.Menu>
                             <Dropdown.Item href="/client-doc">Client documentation</Dropdown.Item>
@@ -234,7 +242,7 @@ const App = () => {
                 <Col>
                     <Form.Group>
                         <Row>
-                            <Col xl="auto">
+                            <Col>
                                 <Form.Label>Search</Form.Label>
                                 <Form.Control id="search-box" type="text" placeholder="Start typing to limit search results" onKeyUp={searchPersons} />
                             </Col>
@@ -243,12 +251,12 @@ const App = () => {
                 </Col>
             </Row>
             <Row>
-                <Col xl="auto">
+                <Col>
                     <p></p>
                 </Col>
             </Row>
             <Row>
-                <Col xl="auto">
+                <Col>
                     <DirectoryTable persons={persons} deleteCallBack={deletePerson} />
                 </Col>
             </Row>
