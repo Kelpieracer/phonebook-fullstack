@@ -50,9 +50,9 @@ Click **Documentation** in the application
 
 ### What else?
 * Typescript was used in both backend and frontend.
+* Bootstrap-react was used for UI.
 * I tried to follow recommended practices in backend and frontend as much as I could find info.
 * Some small front-end methods have jest tests, but this was rather trivial project code-wise (not configuration-wise), so I didn't do more unit tests.
-* Bootstrap used for UI.
 
 ### Finally
 Thank you, this was fun.
