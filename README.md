@@ -1,13 +1,12 @@
-## [<<< BACK](http://phonebook-fs.azurewebsites.net/) ##### (to application)
+### [<<< BACK](http://phonebook-fs.azurewebsites.net/)  (to application)
 
-# phonebook
+# Phonebook Full-Stack
 
 Tapio Mäntysalo, Full Stack 2, UTU, 2020
 
 **Front/Back exercises, part 3 final**
 
-## Phonebook Full-Stack
-Application:
+## Application
 http://phonebook-fs.azurewebsites.net/
 
 ### Git
@@ -19,12 +18,13 @@ Backend:
 Launch Backend 
 ```
 Frontend: 
-```> npm client
+```
+> npm client
 Launch Frontend
 ```
-You can debug and hit breakpoints in both backend and frontend simultaneously
+You can debug and hit breakpoints in both backend and frontend simultaneously.
 
-CORS is used only when host name contains 'LAPTOP', i.e. locally on authors machine
+CORS is used only when host name contains 'LAPTOP', i.e. locally on authors machine.
 
 ### Run deployment version locally
 ```
