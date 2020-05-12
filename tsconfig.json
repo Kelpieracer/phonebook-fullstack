@@ -28,20 +28,21 @@
     "noFallthroughCasesInSwitch": true,
     "noEmit": true,
     "typeRoots": [ "./src/types", "./node_modules/@types"],
-    "esModuleInterop": true,
+    "esModuleInterop": true
   },
-  "include": [
-    "server.ts"
-  ],
+  // "include": [
+  //   "./index.ts"
+  // ],
   "exclude": [
     "node_modules",
     "out",
     "build",
     "scripts",
+    "client",
     "acceptance-tests",
     "webpack",
-    "src/types"
-    // "jest",
-    // "src/setupTests.ts"
+    "src/types",
+    "jest",
+    "src/setupTests.ts"
   ]
 }
