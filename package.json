@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "dev": "cd client && start",
-    "start": "npm install && node out/index.js",
+    "start": "npm install && node ./out/index.js",
     "watch:debug": "node_modules/.bin/nodemon --watch ./src --inspect=5858 -e ts,tsx --exec node -r ts-node/register index.ts",
     "server-doc": "typedoc --out client/build/server-doc index.ts --plugin none --esModuleInterop",
     "build": "tsc --project .",

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const appName = '(phonebookback) ';
+const appName = '(phonebook-fs) ';
 console.log(`${appName}Server script started.`);
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
@@ -148,4 +148,4 @@ app.listen(PORT, () => {
     console.log(`${appName}Server running on port ${PORT}`);
 });
 console.log(`${appName}Server init script exits.`);
-//# sourceMappingURL=index..js.map
+//# sourceMappingURL=index.js.map
