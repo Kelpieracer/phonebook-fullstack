@@ -12,6 +12,7 @@
     "build-server": "tsc -p . --outDir out && npm run-script server-doc",
     "build-client": "cd client && npm run build && npm run-script client-doc",
     "build-all": "npm run-script build-client && npm run-script build-server",
+    "client": "cd client && npm run start",
     "tsc": "tsc",
     "test": "jest",
     "test:watch": "jest --watch",

@@ -18,6 +18,7 @@ import nameExists, { telExists } from '../helpers/directory-helpers'
 import PopUp from './popup'
 import DirectoryTable from './directory-table'
 
+
 const serverUri = window.location.href === 'http://localhost:3000/'
     ? 'http://localhost:3001/api/persons/' : '/api/persons/'
 console.log(`Backend api: ${serverUri}`)
@@ -183,52 +184,66 @@ const App = () => {
     console.log('render')
     return (
         <Container fluid="xl">
-            <p></p>
-            <PopUp title="Duplicate entry" main={showPopUp === 'NAME_EXISTS' ? nameExistsHtml : telExistsHtml}
-                button="Ok" show={showPopUp !== 'NONE'} />
+            <Row>
+                <Col>
+                    <p></p>
+                    <PopUp title="Duplicate entry" main={showPopUp === 'NAME_EXISTS' ? nameExistsHtml : telExistsHtml}
+                        button="Ok" show={showPopUp !== 'NONE'} />
+                </Col>
+            </Row>
             <Row>
                 <Col xl="auto">
                     <h2>Telephone Directory</h2>
                 </Col>
             </Row>
-            <Form.Group>
-                <Row>
-                    <Col xl="auto">
-                        <Form.Label>New name</Form.Label>
-                        <Form.Control size="sm" id="input-name" type="text" placeholder="Enter new name" onKeyDown={checkKey} />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xl="auto">
-                        <Form.Label>Phone number</Form.Label>
-                        <Form.Control size="sm" id="input-tel" type="tel" placeholder="Enter phone number" onKeyDown={checkKey} />
-                    </Col>
-                    <Col xl="auto">
-                        <Button size="sm" onClick={createPerson}>Add</Button>
-                        <p></p>
-                        <p></p>
-                        <Dropdown>
-                            <Dropdown.Toggle size="sm" variant="success" id="dropdown-basic">
-                                Docs
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu>
-                                <Dropdown.Item href="/client-doc">Client documentation</Dropdown.Item>
-                                <Dropdown.Item href="/server-doc">Server documentation</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </Col>
-                </Row>
-            </Form.Group>
-            <Form.Group>
-                <Row>
-                    <Col xl="auto">
-                        <Form.Label>Search</Form.Label>
-                        <Form.Control id="search-box" type="text" placeholder="Start typing to limit search results" onKeyUp={searchPersons} />
-                    </Col>
-                </Row>
-            </Form.Group>
             <Row>
-                <Col xl="auto"> 
+                <Col>
+                    <Form.Group>
+                        <Row>
+                            <Col xl="auto">
+                                <Form.Label>New name</Form.Label>
+                                <Form.Control size="sm" id="input-name" type="text" placeholder="Enter new name" onKeyDown={checkKey} />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xl="auto">
+                                <Form.Label>Phone number</Form.Label>
+                                <Form.Control size="sm" id="input-tel" type="tel" placeholder="Enter phone number" onKeyDown={checkKey} />
+                            </Col>
+                        </Row>
+                    </Form.Group>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Button size="sm" onClick={createPerson}>Add</Button>
+                </Col>
+                <Col>
+                    <Dropdown>
+                        <Dropdown.Toggle size="sm" variant="success" id="dropdown-basic">
+                            Docs
+                            </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="/client-doc">Client documentation</Dropdown.Item>
+                            <Dropdown.Item href="/server-doc">Server documentation</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Form.Group>
+                        <Row>
+                            <Col xl="auto">
+                                <Form.Label>Search</Form.Label>
+                                <Form.Control id="search-box" type="text" placeholder="Start typing to limit search results" onKeyUp={searchPersons} />
+                            </Col>
+                        </Row>
+                    </Form.Group>
+                </Col>
+            </Row>
+            <Row>
+                <Col xl="auto">
                     <p></p>
                 </Col>
             </Row>
@@ -237,7 +252,7 @@ const App = () => {
                     <DirectoryTable persons={persons} deleteCallBack={deletePerson} />
                 </Col>
             </Row>
-        </Container>
+        </Container >
     )
 }
 

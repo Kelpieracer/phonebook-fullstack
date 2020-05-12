@@ -8,10 +8,15 @@ import { connect, disconnect } from "./src/database/database";
 import { IPerson } from './src/database/persons/persons.types'
 import { PersonModel } from './src/database/persons/persons.model'
 import os from 'os'
+import cors from 'cors'
 
 const app = express()
 
 console.log(`${appName}Hostname: ${os.hostname()}`)
+if(os.hostname().includes('LAPTOP')) {
+  app.use(cors())
+  console.log(`${appName}Using CORS`)
+}
 
 // Static files https://expressjs.com/en/starter/static-files.html
 app.use(express.static('client/build'))

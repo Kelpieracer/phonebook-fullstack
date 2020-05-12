@@ -11,8 +11,13 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const database_1 = require("./src/database/database");
 const persons_model_1 = require("./src/database/persons/persons.model");
 const os_1 = __importDefault(require("os"));
+const cors_1 = __importDefault(require("cors"));
 const app = express_1.default();
 console.log(`${appName}Hostname: ${os_1.default.hostname()}`);
+if (os_1.default.hostname().includes('LAPTOP')) {
+    app.use(cors_1.default());
+    console.log(`${appName}Using CORS`);
+}
 // Static files https://expressjs.com/en/starter/static-files.html
 app.use(express_1.default.static('client/build'));
 console.log(`${appName}Static service applied`);
