@@ -224,7 +224,9 @@ const App = () => {
             </Row>
             <Row>
                 <Col xs={{ span: 3, offset: 3 }}>
-                    <Button size="sm" onClick={createPerson}>Add person</Button>
+                    <Button size="sm" onClick={createPerson}>
+                        Add&nbsp;person
+                        </Button>
                 </Col>
                 <Col xs={{ span: 3, offset: 1 }}>
                     <Dropdown>
