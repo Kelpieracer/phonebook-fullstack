@@ -51,7 +51,9 @@ Cloud deployment server will use
 Note that building frontend clears backend docs
 
 ### Source code documentation
-Click **Documentation** in the application
+Click **Documentation** in the application to open this view.
+
+Open the hamburger menu -^ (if you're on mobile) or side bar to browse public components/methods.
 
 ### What else?
 * Typescript was used in both backend and frontend.

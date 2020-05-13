@@ -8,8 +8,8 @@ console.log(`${appName}Server script started.`);
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const body_parser_1 = __importDefault(require("body-parser"));
-const database_1 = require("./src/database/database");
-const persons_model_1 = require("./src/database/persons/persons.model");
+const database_1 = require("./database/database");
+const persons_model_1 = require("./database/persons/persons.model");
 const os_1 = __importDefault(require("os"));
 const cors_1 = __importDefault(require("cors"));
 const app = express_1.default();
@@ -164,4 +164,4 @@ app.listen(PORT, () => {
     console.log(`${appName}Server running on port ${PORT}`);
 });
 console.log(`${appName}Server init script exits.`);
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=server.js.map

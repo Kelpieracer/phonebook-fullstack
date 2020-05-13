@@ -1,13 +1,13 @@
 {
   "name": "phonebook",
-  "version": "3.8.0",
+  "version": "3.11.1",
   "description": "",
-  "main": "index.ts",
+  "main": "server.ts",
   "scripts": {
     "dev": "cd client && start",
-    "start": "node ./out/index.js",
-    "watch:debug": "node_modules/.bin/nodemon --watch ./src --inspect=5858 -e ts,tsx --exec node -r ts-node/register index.ts",
-    "server-doc": "typedoc --out client/build/server-doc index.ts --plugin none --esModuleInterop",
+    "start": "node ./out/server.js",
+    "watch:debug": "node_modules/.bin/nodemon --watch ./src --inspect=5858 -e ts,tsx --exec node -r ts-node/register src/server.ts",
+    "server-doc": "typedoc --out client/build/server-doc src/server.ts --plugin none --esModuleInterop",
     "build": "tsc --project .",
     "build-server": "tsc -p . --outDir out && npm run-script server-doc",
     "build-client": "cd client && npm run build && npm run-script client-doc",
@@ -22,7 +22,7 @@
     "watch": [
       "./"
     ],
-    "exec": "node_modules/.bin/ts-node index.ts  -e ts",
+    "exec": "node_modules/.bin/ts-node src/server.ts  -e ts",
     "ext": "js, json, ts, proto"
   },
   "author": "Tapio Mäntysalo",
