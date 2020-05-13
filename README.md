@@ -1,4 +1,4 @@
-### [<<< BACK](http://phonebook-fs.azurewebsites.net/)  (to application)
+### [<<< BACK](http://phonebookfs.azurewebsites.net/)  (to application)
 
 # Phonebook Full-Stack
 
@@ -7,7 +7,7 @@ Tapio Mäntysalo, Full Stack 2, UTU, 2020
 **Front/Back exercises, part 3 final**
 
 ## Application
-http://phonebook-fs.azurewebsites.net/
+http://phonebookfs.azurewebsites.net/
 
 ### Git
 https://gitlab.utu.fi/dfte/fullstack-2020/web-basics/phonebook-fullstack
