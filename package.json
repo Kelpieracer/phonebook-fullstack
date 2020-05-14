@@ -1,6 +1,6 @@
 {
   "name": "phonebook",
-  "version": "3.11.1",
+  "version": "3.11.2",
   "description": "",
   "main": "server.ts",
   "scripts": {
@@ -10,7 +10,7 @@
     "server-doc": "typedoc --out client/build/server-doc src/server.ts --plugin none --esModuleInterop",
     "build": "tsc --project .",
     "build-server": "tsc -p . --outDir out && npm run-script server-doc",
-    "build-client": "cd client && npm run build && npm run-script client-doc",
+    "build-client": "cd client && npm run test && npm run build && npm run-script client-doc",
     "build-all": "npm run-script build-client && npm run-script build-server",
     "client": "cd client && npm run start",
     "tsc": "tsc",
