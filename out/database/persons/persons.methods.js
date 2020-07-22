@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.sameName = exports.setLastUpdated = void 0;
 async function setLastUpdated() {
     const now = new Date();
     if (!this.lastUpdated || this.lastUpdated < now) {

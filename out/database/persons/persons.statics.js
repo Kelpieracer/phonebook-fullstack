@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.findAll = exports.findOneOrCreate = void 0;
 async function findOneOrCreate({ name, tel }) {
     const record = await this.findOne({ name, tel });
     if (record) {

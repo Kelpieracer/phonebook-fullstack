@@ -1,6 +1,7 @@
 "use strict";
 // https://medium.com/swlh/using-typescript-with-mongodb-393caf7adfef
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.disconnect = exports.connect = void 0;
 // import * as Mongoose from 'mongoose'
 const Mongoose = require("mongoose");
 require('dotenv').config();
