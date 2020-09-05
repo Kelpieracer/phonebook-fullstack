@@ -18,7 +18,6 @@
                 "<node_internals>/**"
             ]
         },
-
         {
             "type": "chrome",
             "request": "launch",
@@ -47,23 +46,22 @@
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
-            "disableOptimisticBPs": true,
+            "disableOptimisticBPs": true
         },
         {
             "type": "node",
             "request": "launch",
             "name": "Client Jest Current File",
             "program": "${workspaceRoot}\\client\\node_modules\\jest\\bin\\jest.js",
-            //"cwd": "${workspaceFolder}",
             "args": [
                 "test",
                 "--testMatch=\"**/+(*.)+(spec|test).+(ts|js)?(x)\"",
                 "--testPathPattern=${fileBasenameNoExtension}",
-                "--runInBand",
+                "--runInBand"
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
-            "disableOptimisticBPs": true,
+            "disableOptimisticBPs": true
         },
         {
             "type": "node",
@@ -81,26 +79,29 @@
             "envFile": "${workspaceRoot}/client/.env"
         },
         {
-            "name": "Client Debug Jest", // name to show in Debug config picker
+            "name": "Client Debug Jest",
             "type": "node",
             "request": "launch",
             "address": "localhost",
-            // everything above here is standard node debug
-            // some people specify "port": 5858, but that didn't work; Code seems to pick the right one now
-            "sourceMaps": true, // if you are using Babel or TS, make this true
-            // you can add another arg to pattern-match limit the tests, just as when normally running jest
+            "sourceMaps": true,
             "runtimeArgs": [
                 "${workspaceRoot}/client/node_modules/jest/bin/jest.js",
-                "--runInBand", // https://facebook.github.io/jest/docs/en/cli.html#runinband - don't parallelize
-                "--no-cache" // https://facebook.github.io/jest/docs/en/cli.html#cache - just avoid caching issues
+                "--runInBand",
+                "--no-cache"
             ],
             "env": {
-                "NODE_ENV": "test" // make sure it matches your target; useful for babel config
+                "NODE_ENV": "test"
             }
+        },
+        {
+            "name": "Docker Node.js Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "platform": "node"
         }
     ]
 }
-
 // {
 //     // Use IntelliSense to learn about possible attributes.
 //     // Hover to view descriptions of existing attributes.

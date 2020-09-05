@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  phonebook-fullstack:
+    image: phonebook-fullstack
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3001:3001
+      - 9229:9229

@@ -168,10 +168,14 @@ console.log(`${appName}Routes loaded.`)
 /**
  * Set server port
  */
+if(!process.env.PORT) console.log(`${appName}No env var PORT, using default`);
+if(!process.env.HOST) console.log(`${appName}No env var HOST, using default`);
 const PORT = process.env.PORT || 3001
+const HOST = process.env.HOST || '0.0.0.0'
 console.log(`${appName}Environment variable PORT=${PORT}.`)
-app.listen(PORT, () => {
-  console.log(`${appName}Server running on port ${PORT}`)
+app.listen(+PORT, HOST, () => {
+  console.log(`${appName}Server running on ${HOST}:${PORT}`)
 })
+
 
 console.log(`${appName}Server init script exits.`)

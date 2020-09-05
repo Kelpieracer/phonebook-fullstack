@@ -1,0 +1,13 @@
+version: '3.4'
+sfwfdf
+services:
+  phonebook-fullstack:
+    image: phonebook-fullstack
+    build: .
+    environment:
+      NODE_ENV: development
+    ports:
+      - 49162:3000
+      - 49163:3001
+      - 9229:9220
+    command: ["node", "--inspect=0.0.0.0:9229", "./out/server.js"]

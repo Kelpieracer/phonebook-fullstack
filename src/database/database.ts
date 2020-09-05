@@ -15,6 +15,7 @@ export const connect = (): string | undefined => {
   if (!uri) {
     const error = 'Database uri is not valid'
     console.log(error)
+    throw new Error(error)
     return error
   }
 
