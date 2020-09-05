@@ -19,6 +19,10 @@ if(os.hostname().includes('LAPTOP') || os.hostname().includes('G0690')) {
   console.log(`${appName}Using CORS`)
 }
 
+setTimeout(() => {
+  console.log(process.env.MONGODB_URI?.substr(0,5))
+}, 5000);
+
 // Static files served at
 app.use(express.static('client/build'))
 console.log(`${appName}Static service applied`)

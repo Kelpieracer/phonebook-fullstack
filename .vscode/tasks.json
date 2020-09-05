@@ -1,0 +1,50 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "docker-build",
+			"label": "docker-build",
+			"platform": "node",
+			"dockerBuild": {
+				"dockerfile": "${workspaceFolder}/Dockerfile",
+				"context": "${workspaceFolder}",
+				"pull": true
+			}
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: release",
+			"dependsOn": [
+				"docker-build"
+			],
+			"platform": "node"
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: debug",
+			"dependsOn": [
+				"docker-build",
+			],
+			"dockerRun": {
+				// "command": "node_modules/.bin/nodemon --watch ./src --inspect=5858 -e ts,tsx --exec node -r ts-node/register src/server.ts",
+				"env": {
+					"DEBUG": "*",
+					"NODE_ENV": "development",
+				},
+				"envFiles": [
+					".env"
+				],
+				"ports": [
+					{
+						"containerPort": 3001,
+						"hostPort": 3001
+					}
+				]
+			},
+			"node": {
+				"enableDebugging": true,
+				"inspectPort": 9229,
+			},
+		}
+	]
+}
