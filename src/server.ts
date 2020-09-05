@@ -14,7 +14,7 @@ const app = express()
 
 // CORS needed only locally
 console.log(`${appName}Hostname: ${os.hostname()}`)
-if(os.hostname().includes('LAPTOP')) {
+if(os.hostname().includes('LAPTOP') || os.hostname().includes('G0690')) {
   app.use(cors())
   console.log(`${appName}Using CORS`)
 }
